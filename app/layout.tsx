@@ -1,4 +1,5 @@
 import { Be_Vietnam_Pro } from "next/font/google";
+import Navbar from "./components/Navbar";
 import "./globals.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -15,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${beVietnamPro.className} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
