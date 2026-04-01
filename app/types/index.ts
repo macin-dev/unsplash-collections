@@ -12,4 +12,5 @@ export type Item = {
   };
   width: number;
   height: number;
+  blurDataURL: string | undefined;
 } & Record<string, unknown>;

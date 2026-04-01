@@ -15,10 +15,13 @@ export default function MasonryWrapper({ results }: { results: Item[] }) {
         <Image
           className="mb-6"
           key={result.id}
-          src={result.urls.small}
-          width={result.width}
-          height={result.height}
+          src={`${result.urls.raw}&w=900&q=75&auto=format&fit=max`}
+          width={900}
+          height={Math.round((900 * result.height) / result.width)}
+          sizes="(max-width: 500px) 100vw, (max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
           alt=""
+          placeholder={result.blurDataURL ? "blur" : "empty"}
+          blurDataURL={result.blurDataURL}
         />
       ))}
     </Masonry>

@@ -1,4 +1,5 @@
 import MasonryWrapper from "../components/MasonryWrapper";
+import { blurHashToDataURL } from "../lib/blurHash";
 
 export default async function SearchPage({
   searchParams,
@@ -23,7 +24,12 @@ export default async function SearchPage({
   }
 
   const results = await res.json();
-  const photos = results?.results || results;
+  const photos = (results?.results || results).map((result: any) => ({
+    ...result,
+    blurDataURL: blurHashToDataURL({
+      hash: result.blur_hash,
+    }),
+  }));
 
   return <MasonryWrapper results={photos} />;
 }
