@@ -1,11 +1,8 @@
 import MasonryWrapper from "../components/MasonryWrapper";
+import { SearchPageProps, SearchResponseSchema } from "../types";
 import { blurHashToDataURL } from "../lib/blurHash";
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const { query } = await searchParams;
 
   const unsplashKey = process.env.UNSPLASH_ACCESS_KEY;
@@ -23,8 +20,11 @@ export default async function SearchPage({
     throw new Error("Failed to fetch data");
   }
 
-  const results = await res.json();
-  const photos = (results?.results || results).map((result: any) => ({
+  const json: unknown = await res.json();
+  const results = query ? json : { results: json };
+  const parsed = SearchResponseSchema.parse(results);
+
+  const photos = parsed.results.map((result) => ({
     ...result,
     blurDataURL: blurHashToDataURL({
       hash: result.blur_hash,
