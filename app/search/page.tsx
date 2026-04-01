@@ -1,5 +1,3 @@
-import Form from "next/form";
-import SearchBar from "../components/SearchBar";
 import MasonryWrapper from "../components/MasonryWrapper";
 
 export default async function SearchPage({
@@ -27,18 +25,5 @@ export default async function SearchPage({
   const results = await res.json();
   const photos = results?.results || results;
 
-  return (
-    <section>
-      <div className="bg-linear-to-r from-orange-300 via-red-400 to-fuchsia-700 h-20 relative mb-18">
-        <Form
-          action="/search"
-          className="absolute max-w-132 w-full left-1/2 transForm -translate-x-1/2 bottom-0 translate-y-1/2"
-        >
-          <SearchBar value={query} />
-        </Form>
-      </div>
-
-      <MasonryWrapper results={photos} />
-    </section>
-  );
+  return <MasonryWrapper results={photos} />;
 }

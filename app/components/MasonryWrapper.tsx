@@ -2,15 +2,7 @@
 
 import Image from "next/image";
 import Masonry from "react-masonry-css";
-
-type Item = {
-  id: string | number;
-  urls: {
-    small: string;
-  };
-  width: number;
-  height: number;
-} & Record<string, unknown>;
+import { Item } from "../types";
 
 export default function MasonryWrapper({ results }: { results: Item[] }) {
   return (

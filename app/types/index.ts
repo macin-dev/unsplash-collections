@@ -4,3 +4,12 @@ export type NavLinkProps = {
   isActive: boolean;
   children: React.ReactNode;
 };
+
+export type Item = {
+  id: string | number;
+  urls: {
+    small: string;
+  };
+  width: number;
+  height: number;
+} & Record<string, unknown>;
