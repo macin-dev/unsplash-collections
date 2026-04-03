@@ -35,3 +35,18 @@ const PhotoSchema = z.object({
 export const SearchResponseSchema = z.object({
   results: z.array(PhotoSchema),
 });
+
+// Collection Types
+export const PreviewPhotoSchema = z.object({
+  id: z.string(),
+  urls: z.object({
+    small: z.string(),
+  }),
+});
+
+export const CollectionSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  total_photos: z.number(),
+  preview_photos: z.array(PreviewPhotoSchema),
+});
