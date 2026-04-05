@@ -50,3 +50,24 @@ export const CollectionSchema = z.object({
   total_photos: z.number(),
   preview_photos: z.array(PreviewPhotoSchema),
 });
+
+// Collection's Photos Types
+export const CollectionPhotoSchema = z.object({
+  id: z.string(),
+  alt_description: z.string().nullable(),
+  blur_hash: z.string(),
+  urls: z.object({
+    small: z.string(),
+    raw: z.string(),
+  }),
+  width: z.number(),
+  height: z.number(),
+});
+
+export const CollectionInfoSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  total_photos: z.number(),
+});
+
+export type CollectionPhoto = z.infer<typeof CollectionPhotoSchema>;

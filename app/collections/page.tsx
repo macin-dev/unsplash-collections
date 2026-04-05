@@ -30,7 +30,7 @@ export default async function Collections() {
         </p>
       </div>
 
-      <div className="grid gap-8 max-w-89.25 mx-auto lg:grid-cols-2 lg:max-w-186.5 xl:grid-cols-3 xl:max-w-283.75">
+      <ul className="grid gap-8 max-w-89.25 mx-auto lg:grid-cols-2 lg:max-w-186.5 xl:grid-cols-3 xl:max-w-283.75">
         {parsedData.map((collection) => {
           const previewLength = collection.preview_photos.slice(
             0,
@@ -47,7 +47,7 @@ export default async function Collections() {
             />
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 }
