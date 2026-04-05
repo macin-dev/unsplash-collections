@@ -18,6 +18,14 @@ export default async function CollectionGallery({
     ),
   ]);
 
+  if (!collectionInfo.ok || !photos.ok) {
+    return (
+      <p className="text-red-500 text-center">
+        Failed to fetch collection data
+      </p>
+    );
+  }
+
   const collectionInfoJson: unknown = await collectionInfo.json();
   const parsedCollectionInfo = CollectionInfoSchema.parse(collectionInfoJson);
   const collection: unknown = await photos.json();

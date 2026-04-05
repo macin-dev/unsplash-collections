@@ -7,6 +7,14 @@ export default async function Collections() {
   const resp = await fetch(
     `https://api.unsplash.com/collections?client_id=${process.env.UNSPLASH_ACCESS_KEY} `,
   );
+
+  // Error handling for failed fetch
+  if (!resp.ok) {
+    return (
+      <p className="text-red-500 text-center">Failed to fetch collections</p>
+    );
+  }
+
   const data: unknown = await resp.json();
   const parsedData = CollectionSchema.array().parse(data);
 

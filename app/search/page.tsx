@@ -16,8 +16,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   const res = await fetch(urlAPI);
 
+  // Error handling for failed fetch
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    return (
+      <p className="text-red-500 text-center">Failed to fetch search results</p>
+    );
   }
 
   const json: unknown = await res.json();
