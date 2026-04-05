@@ -12,6 +12,7 @@ export type Item = {
   urls: {
     raw: string;
   };
+  likes: number;
   width: number;
   height: number;
   blurDataURL: string;
@@ -27,6 +28,7 @@ const PhotoSchema = z.object({
   urls: z.object({
     raw: z.string(),
   }),
+  likes: z.number(),
   width: z.number(),
   height: z.number(),
   blur_hash: z.string(),
@@ -56,6 +58,7 @@ export const CollectionPhotoSchema = z.object({
   id: z.string(),
   alt_description: z.string().nullable(),
   blur_hash: z.string(),
+  likes: z.number(),
   urls: z.object({
     small: z.string(),
     raw: z.string(),
