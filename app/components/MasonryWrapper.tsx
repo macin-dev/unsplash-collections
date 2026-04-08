@@ -4,6 +4,7 @@ import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { Item } from "../types";
 import HeartIcon from "@/public/heart.png";
+import Link from "next/link";
 
 export default function MasonryWrapper({ results }: { results: Item[] }) {
   return (
@@ -14,26 +15,28 @@ export default function MasonryWrapper({ results }: { results: Item[] }) {
     >
       {results.map((result) => (
         <div key={result.id} className={`w-full relative cursor-pointer`}>
-          <Image
-            className="mb-6"
-            src={`${result.urls.raw}&w=900&q=75&auto=format&fit=max`}
-            width={900}
-            height={Math.round((900 * result.height) / result.width)}
-            sizes="(max-width: 500px) 100vw, (max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
-            alt={result.likes.toString()}
-            placeholder={result.blurDataURL ? "blur" : "empty"}
-            blurDataURL={result.blurDataURL}
-          />
-          <span className="absolute inset-0 bg-linear-to-b from-black/10 via-black/20 to-black/80 opacity-0 hover:opacity-100 text-white font-bold flex items-end pl-4 pb-4 transition-opacity z-20">
+          <Link href={`/photo/${result.id}`} className="block">
             <Image
-              src={HeartIcon}
-              alt="Likes"
-              width={24}
-              height={24}
-              className="mr-1"
+              className="mb-6"
+              src={`${result.urls.raw}&w=900&q=75&auto=format&fit=max`}
+              width={900}
+              height={Math.round((900 * result.height) / result.width)}
+              sizes="(max-width: 500px) 100vw, (max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
+              alt={result.likes.toString()}
+              placeholder={result.blurDataURL ? "blur" : "empty"}
+              blurDataURL={result.blurDataURL}
             />
-            {result.likes}
-          </span>
+            <span className="absolute inset-0 bg-linear-to-b from-black/10 via-black/20 to-black/80 opacity-0 hover:opacity-100 text-white font-bold flex items-end pl-4 pb-4 transition-opacity z-20">
+              <Image
+                src={HeartIcon}
+                alt="Likes"
+                width={24}
+                height={24}
+                className="mr-1"
+              />
+              {result.likes}
+            </span>
+          </Link>
         </div>
       ))}
     </Masonry>

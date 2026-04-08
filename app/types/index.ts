@@ -22,6 +22,13 @@ export type SearchPageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
+export type ButtonProps = {
+  src: string;
+  text: string;
+  width?: number;
+  height?: number;
+};
+
 // API Response Types
 const PhotoSchema = z.object({
   id: z.string(),
@@ -53,6 +60,8 @@ export const CollectionSchema = z.object({
   preview_photos: z.array(PreviewPhotoSchema),
 });
 
+export type CollectionItemProps = z.infer<typeof CollectionSchema>;
+
 // Collection's Photos Types
 export const CollectionPhotoSchema = z.object({
   id: z.string(),
@@ -71,6 +80,33 @@ export const CollectionInfoSchema = z.object({
   id: z.string(),
   title: z.string(),
   total_photos: z.number(),
+});
+
+// Photo Page Types
+export const PhotoDetailSchema = z.object({
+  id: z.string(),
+  alt_description: z.string().nullable(),
+  blur_hash: z.string(),
+  likes: z.number(),
+  created_at: z.string(),
+  width: z.number(),
+  height: z.number(),
+  urls: z.object({
+    regular: z.string(),
+  }),
+  links: z.object({
+    download: z.string(),
+  }),
+  user: z.object({
+    id: z.string(),
+    name: z.string(),
+    profile_image: z.object({
+      medium: z.string(),
+    }),
+  }),
+  related_collections: z.object({
+    results: z.array(CollectionSchema),
+  }),
 });
 
 export type CollectionPhoto = z.infer<typeof CollectionPhotoSchema>;
