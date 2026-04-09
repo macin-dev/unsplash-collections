@@ -27,50 +27,52 @@ export default async function PhotoPage({
   const parsedPhoto = PhotoDetailSchema.parse(photo);
 
   return (
-    <section>
-      <div className="max-w-138.25 mx-auto w-full aspect-square">
-        <div className="w-full h-full">
+    <section className="py-10">
+      <div className="max-w-138.25 mx-auto w-full xl:flex xl:max-w-283.75 xl:gap-8 xl:h-[calc(100vh-150px)]">
+        <div className="bg-gray-50 h-full aspect-square xl:flex-1 xl:aspect-auto">
           <Image
             src={parsedPhoto.urls.regular}
             width={parsedPhoto.width}
             height={parsedPhoto.height}
             alt={parsedPhoto.alt_description || "Photo"}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain xl:object-top"
           />
         </div>
 
-        <div className="flex flex-col gap-5 mt-10">
-          <div className="flex items-center gap-4">
-            <Image
-              src={parsedPhoto.user.profile_image.medium}
-              width={40}
-              height={40}
-              alt={parsedPhoto.user.name}
-              className="rounded-full"
-            />
-            <span className="font-medium text-sm tracking-[-3.5%]">
-              {parsedPhoto.user.name}
+        <div className="xl:flex-1">
+          <div className="flex flex-col gap-5 mt-10 xl:mt-0">
+            <div className="flex items-center gap-4">
+              <Image
+                src={parsedPhoto.user.profile_image.medium}
+                width={40}
+                height={40}
+                alt={parsedPhoto.user.name}
+                className="rounded-full"
+              />
+              <span className="font-medium text-sm tracking-[-3.5%]">
+                {parsedPhoto.user.name}
+              </span>
+            </div>
+
+            <span className="text-light text-sm tracking-[-3.5%] text-[#121826]">
+              Published on {formatDate(parsedPhoto.created_at)}
             </span>
+
+            <div className="flex gap-4">
+              <Button src={PlusIcon} text="Add to Collection" />
+              <Button src={DownArrow} text="Download" />
+            </div>
           </div>
 
-          <span className="text-light text-sm tracking-[-3.5%] text-[#121826]">
-            Published on {formatDate(parsedPhoto.created_at)}
-          </span>
+          <div className="mt-10">
+            <h3 className="text-[1.25rem] font-semibold tracking-[-3.5%]">
+              Collections
+            </h3>
 
-          <div className="flex gap-4">
-            <Button src={PlusIcon} text="Add to Collection" />
-            <Button src={DownArrow} text="Download" />
+            <ListCollection
+              collectionArray={parsedPhoto.related_collections.results}
+            />
           </div>
-        </div>
-
-        <div className="mt-10">
-          <h3 className="text-[1.25rem] font-semibold tracking-[-3.5%]">
-            Collections
-          </h3>
-
-          <ListCollection
-            collectionArray={parsedPhoto.related_collections.results}
-          />
         </div>
       </div>
     </section>
