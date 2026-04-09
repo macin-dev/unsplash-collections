@@ -59,8 +59,16 @@ export default async function PhotoPage({
             </span>
 
             <div className="flex gap-4">
-              <Button src={PlusIcon} text="Add to Collection" />
-              <Button src={DownArrow} text="Download" />
+              <Button
+                href={`/api/download/${parsedPhoto.id}`}
+                src={PlusIcon}
+                text="Add to Collection"
+              />
+              <Button
+                href={`/api/download/${parsedPhoto.id}`}
+                src={DownArrow}
+                text="Download"
+              />
             </div>
           </div>
 

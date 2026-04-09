@@ -25,6 +25,7 @@ export type SearchPageProps = {
 export type ButtonProps = {
   src: string;
   text: string;
+  href: string;
   width?: number;
   height?: number;
 };
